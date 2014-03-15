@@ -31,9 +31,12 @@ protected:
   std::string date_format;
   std::ostream &output;
   std::mutex mutex;
-  void format_log_msg(int level, std::string *msg) const;
-  void format_log_msg(std::string level, std::string *msg) const;
+
   virtual void output_msg(std::string msg);
+  void format_log_msg(std::string level, std::string *msg) const;
+
+  // Override this method to customize log line formats.
+  virtual void format_log_msg(int level, std::string *msg) const;
 
 public:
   ulog(std::ostream &output=std::cout, std::string date_format="%a %Y/%m/%d %H:%M:%S");
