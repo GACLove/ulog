@@ -73,7 +73,16 @@ void ulog<false, false>::log(int level, std::string msg) {
 
 template <bool Enabled, bool Locking>
 void ulog<Enabled, Locking>::format_log_msg(int level, std::string *msg) const {
-  this->format_log_msg("LVL", msg);
+  std::string level_str;
+
+  switch(level) {
+  case 0: level_str = "DEBUG"; break;
+  case 1: level_str = "INFO"; break;
+  case 2: level_str = "WARNING"; break;
+  case 3: level_str = "ERROR"; break;
+  }
+
+  this->format_log_msg(level_str, msg);
 }
 
 template <bool Enabled, bool Locking>
